@@ -1,4 +1,3 @@
-import "./style.css";
 import * as THREE from "three";
 import { createCube } from "./createCube";
 
@@ -55,3 +54,18 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.render(scene, camera);
+
+const clock = new THREE.Clock();
+function animate() {
+  const elapsedTime = clock.getElapsedTime();
+
+  elements.group.rotation.z = (elapsedTime * Math.PI) / 4;
+  elements.group.children.forEach((child) =>
+    child.position.copy(
+      child.position.normalize().multiplyScalar(2 + Math.sin(elapsedTime))
+    )
+  );
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+animate();
