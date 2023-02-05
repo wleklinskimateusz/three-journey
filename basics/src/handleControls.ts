@@ -1,7 +1,7 @@
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
+import { PerspectiveCamera } from "three";
 type HandleControlsProps = {
-  camera: THREE.PerspectiveCamera;
+  camera: PerspectiveCamera;
   canvas: HTMLCanvasElement;
 };
 

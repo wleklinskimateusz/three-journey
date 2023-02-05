@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import { Scene } from "three";
 import { handleAnimation } from "./handleAnimation";
 import { createOnResize } from "./onEvents/createOnResize";
 import { createOnDoubleClick } from "./onEvents/createOnDoubleClick";
@@ -10,7 +10,7 @@ import { renderScene } from "./renderScene";
 
 const canvas = document.querySelector<HTMLCanvasElement>("#app")!;
 
-const scene = new THREE.Scene();
+const scene = new Scene();
 
 const sizes: Sizes = {
   width: window.innerWidth,

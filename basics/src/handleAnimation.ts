@@ -1,10 +1,10 @@
-import * as THREE from "three";
+import { Clock, Scene, Camera, WebGLRenderer } from "three";
 
-const clock = new THREE.Clock();
+const clock = new Clock();
 type AnimateProps = {
-  scene: THREE.Scene;
-  camera: THREE.Camera;
-  renderer: THREE.WebGLRenderer;
+  scene: Scene;
+  camera: Camera;
+  renderer: WebGLRenderer;
   callback: (seconds: number) => void;
 };
 export function handleAnimation(props: AnimateProps) {

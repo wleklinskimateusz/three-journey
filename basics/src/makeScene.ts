@@ -1,17 +1,22 @@
-import * as THREE from "three";
+import gsap from "gsap";
+import { addObjectGui } from "./gui";
+import { createCube } from "./makers/createCube";
+import { door } from "./textures/door";
 
 export function makeScene() {
-  const geometry = new THREE.BufferGeometry();
-  const triangles = 50;
-  const positionsArray = new Float32Array(triangles * 3 * 3)
-    // .fill(0)
-    .map(() => (Math.random() - 0.5) * 10);
-  const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
-  geometry.setAttribute("position", positionsAttribute);
-
-  const material = new THREE.MeshBasicMaterial({
-    color: 0xff0000,
-    wireframe: true,
+  const box = createCube(2, {
+    map: door.color,
   });
-  return { box: new THREE.Mesh(geometry, material) };
+  addObjectGui({
+    mesh: box,
+    name: "box",
+    callbacks: {
+      spin: () => {
+        console.log("spin");
+        gsap.to(box.rotation, { duration: 1, y: box.rotation.y + 2 * Math.PI });
+      },
+    },
+  });
+
+  return { box };
 }
