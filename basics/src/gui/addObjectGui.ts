@@ -25,7 +25,7 @@ export function addObjectGui<T extends string>({
   const folder = gui.addFolder(name);
   const buttons = folder.addFolder("callbacks");
   if (callbacks !== undefined)
-    typedKeys(callbacks).forEach((key) => buttons.add(callbacks, key));
+    Object.keys(callbacks).forEach((key) => buttons.add(callbacks, key));
 
   folder.add(mesh.material, "visible");
   folder.addColor(mesh.material, "color");
@@ -38,7 +38,4 @@ export function addObjectGui<T extends string>({
       attributeValues[attribute]
     )
   );
-}
-function typedKeys<T extends Record<string, any>>(obj: T) {
-  return Object.keys(obj) as Array<keyof typeof obj>;
 }
