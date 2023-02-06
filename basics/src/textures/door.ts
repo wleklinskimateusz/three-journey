@@ -1,11 +1,12 @@
 import { textureLoader } from "./textureLoader";
-// "color" | "alpha" | "height" | "normal" | "ambientOcclusion"
 const textureFilenames = [
-  "color",
   "alpha",
-  "height",
-  "normal",
   "ambientOcclusion",
+  "color",
+  "height",
+  "metalness",
+  "normal",
+  "roughness",
 ] as const;
 export type TextureFilenames = typeof textureFilenames[number];
 

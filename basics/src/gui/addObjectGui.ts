@@ -6,7 +6,7 @@ import { attributes } from "./const";
 const defaults: AttributesProps = {
   position: { min: -3, max: 3, step: 0.01 },
   rotation: { min: 0, max: 2 * Math.PI, step: 0.1 },
-  scale: { min: -3, max: 3, step: 0.01 },
+  scale: { min: 0, max: 6, step: 0.1 },
 };
 
 export function addObjectGui<T extends string>({
@@ -27,8 +27,7 @@ export function addObjectGui<T extends string>({
   if (callbacks !== undefined)
     Object.keys(callbacks).forEach((key) => buttons.add(callbacks, key));
 
-  folder.add(mesh.material, "visible");
-  folder.addColor(mesh.material, "color");
+  folder.add(mesh, "visible");
 
   attributes.forEach((attribute) =>
     setAttributes(

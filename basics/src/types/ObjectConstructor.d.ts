@@ -1,17 +1,8 @@
-export type FromEntries<T> = T extends readonly [
-  infer Key extends string,
-  infer Value
-]
-  ? {
-      [K in Key]: Value;
-    }
-  : {
-      [K: string]: any;
-    };
-
 declare global {
   interface ObjectConstructor {
-    fromEntries<T>(obj: T[]): FromEntries<T>;
+    fromEntries<K, T>(obj: (readonly [K, T])[]): Record<K, T>;
     keys<T>(obj: T): (keyof T)[];
+    values<T>(obj: T): T[keyof T][];
   }
 }
+export default global;
