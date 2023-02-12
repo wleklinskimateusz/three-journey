@@ -13,8 +13,8 @@ jobs:
     
     - name: set up git config
       run: |
-        git config --local user.email ${{ secrets.email }}
-        git config --local user.name ${{ secrets.name }}
+        git config --local user.email wleklinskimateusz05@gmail.com
+        git config --local user.name wleklinskimateusz
 
     - name: Deploy To Github Pages
       uses: actions/setup-node@v2
