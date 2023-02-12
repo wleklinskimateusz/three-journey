@@ -1,11 +1,5 @@
-import {
-  AmbientLight,
-  AxesHelper,
-  PointLight,
-  WebGLRenderer,
-  Mesh,
-} from "three";
-import { addObjectGui, gui } from "./gui";
+import { AmbientLight, PointLight, WebGLRenderer } from "three";
+import { gui } from "./gui";
 import { makeScene } from "./makeScene";
 import { setupCamera } from "./setupCamera";
 import { Sizes } from "./types/Sizes";
@@ -27,10 +21,6 @@ type RenderSceneProps = {
   sizes: Sizes;
   canvas: HTMLCanvasElement;
 };
-
-function rand(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
 
 export function renderScene({ scene, sizes, canvas }: RenderSceneProps) {
   const initialElements = setupElements({ sizes });
