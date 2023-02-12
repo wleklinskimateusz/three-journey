@@ -11,17 +11,24 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: set up git config
+    - name: Init new repo in dist folder and commit generated files
       run: |
-        git config --local user.email wleklinskimateusz05@gmail.com
-        git config --local user.name wleklinskimateusz
+        cd dist
+        git init
+        git branch -M main
+        git add -A
+        git config --local --add safe.directory /github/workspace
+        git config --local user.email ${{ secrets.email }}
+        git config --local user.name ${{ secrets.name }}
+        git commit -m 'deploy'
 
-    - name: Deploy To Github Pages
-      uses: actions/setup-node@v2
+    - name: Force push to destination branch
+      uses: ad-m/github-push-action@v0.5.0
       with:
-        node-version: '18'
-    - run: yarn
-    - run: yarn deploy
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        force: true
+        directory: ./dist
 
 
     
