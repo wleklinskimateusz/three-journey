@@ -8,8 +8,8 @@ import { gsap } from "gsap";
 function setupElements({ sizes }: { sizes: Sizes }) {
   const camera = setupCamera({ sizes });
   const axesHelper = new AxesHelper(5);
-  const light = new AmbientLight(0xfff, 0.5);
-  const pointLight = new PointLight(0xfff, 0.5);
+  const light = new AmbientLight(0xffffff, 0.5);
+  const pointLight = new PointLight(0xffffff, 0.5);
   pointLight.position.set(2, 3, 4);
   return { camera, axesHelper, light, pointLight };
 }

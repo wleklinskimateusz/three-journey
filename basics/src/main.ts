@@ -7,6 +7,8 @@ import { Sizes } from "./types/Sizes";
 import "./style.css";
 import { createFrame } from "./createFrame";
 import { renderScene } from "./renderScene";
+import { loadingManager } from "./loadingManager";
+import { fonts } from "./fonts";
 
 const canvas = document.querySelector<HTMLCanvasElement>("#app")!;
 
@@ -17,13 +19,18 @@ const sizes: Sizes = {
   height: window.innerHeight,
 };
 
-const { camera, renderer } = renderScene({ scene, sizes, canvas });
-const controls = handleControls({ camera, canvas });
-window.addEventListener("resize", createOnResize({ sizes, camera, renderer }));
-window.addEventListener("dblclick", createOnDoubleClick({ canvas }));
-handleAnimation({
-  scene,
-  camera,
-  renderer,
-  callback: createFrame({ controls }),
-});
+loadingManager.onLoad = () => {
+  const { camera, renderer } = renderScene({ scene, sizes, canvas });
+  const controls = handleControls({ camera, canvas });
+  handleAnimation({
+    scene,
+    camera,
+    renderer,
+    callback: createFrame({ controls }),
+  });
+  window.addEventListener(
+    "resize",
+    createOnResize({ sizes, camera, renderer })
+  );
+  window.addEventListener("dblclick", createOnDoubleClick({ canvas }));
+};
