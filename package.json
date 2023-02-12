@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://wleklinskimateusz.github.io/three-journey/",
+  "homepage": "https://wleklinskimateusz.github.io/three-journey-01-basics/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "predeploy": "yarn build --base=https://wleklinskimateusz.github.io/three-journey/",
+    "predeploy": "yarn build --base=https://wleklinskimateusz.github.io/three-journey-01-basics/",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
