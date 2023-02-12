@@ -16,15 +16,8 @@ jobs:
       with:
         node-version: '18'
     - run: yarn
-    - run: yarn build
-    - run: ls dist/
-
-    - name: set up git config
-      run: |
-        git config --local user.email ${{ secrets.email }}
-        git config --local user.name ${{ secrets.name }}
-        
-    - name: Publish
     - run: yarn deploy
+
+
     
 
