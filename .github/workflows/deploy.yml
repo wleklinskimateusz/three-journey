@@ -21,8 +21,8 @@ jobs:
     - name: Init new repo in dist folder and commit generated files
       run: |
         cd dist
+        git config --global init.defaultBranch
         git init
-        git branch -M main
         git add -A
         git config --local --add safe.directory /github/workspace
         git config --local user.email ${{ secrets.email }}
