@@ -6,11 +6,15 @@ import {
   PlaneGeometry,
   SphereGeometry,
   TorusGeometry,
+  MeshStandardMaterial,
+  MeshMatcapMaterial,
+  MeshBasicMaterial,
 } from "three";
 import { fonts } from "./fonts";
 import { createTextGeometry } from "./geometries/createTextGeometry";
+import { matcapMaterial } from "./materials/matcapMaterial";
 
-import { materialWithEnvironment } from "./materials/materialWithEnvironment";
+import { mirrorMaterial } from "./materials/mirrorMaterial";
 
 function isNotGlBufferAttribute<
   T extends GLBufferAttribute | BufferAttribute | InterleavedBufferAttribute
@@ -20,7 +24,7 @@ function isNotGlBufferAttribute<
 
 export function makeScene() {
   // you can import any material from the materials folder
-  const material = materialWithEnvironment;
+  const material = matcapMaterial as MeshStandardMaterial | MeshMatcapMaterial;
 
   const sphere = new Mesh(new SphereGeometry(0.5, 64, 64), material);
   sphere.position.x = -1.5;
@@ -51,8 +55,21 @@ export function makeScene() {
     createTextGeometry("Hello There", fonts.helvetiker),
     material
   );
-  text.position.y = 1;
   text.name = "text";
+  text.position.y = 1;
 
-  return { sphere, plane, torus, text };
+  const stars = Object.fromEntries(
+    new Array(100).fill(0).map((_, i) => {
+      const starGeometry = new SphereGeometry(0.05, 8, 8);
+      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
+      const star = new Mesh(starGeometry, starMaterial);
+      star.position.x = (Math.random() - 0.5) * 20;
+      star.position.y = (Math.random() - 0.5) * 20;
+      star.position.z = -5;
+      star.name = "star";
+      return [i, star];
+    })
+  );
+
+  return { sphere, plane, torus, text, ...stars };
 }

@@ -1,6 +1,6 @@
 import { Scene } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { gui } from "./gui";
+import { gui } from "../gui";
 
 type FrameProps = {
   controls: OrbitControls;
@@ -11,10 +11,7 @@ const speed = {
   x: 0.15,
 };
 
-gui.add(speed, "x", 0, 1, 0.1).name("rotationX");
-gui.add(speed, "y", 0, 1, 0.1).name("rotationY");
-
-export function createFrame({
+export function animationFrame({
   controls,
 }: FrameProps): (seconds: number, scene: Scene) => void {
   return (seconds, scene) => {

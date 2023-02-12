@@ -3,15 +3,18 @@ import { loadingManager } from "../loadingManager";
 
 const cubeTextureLoader = new CubeTextureLoader(loadingManager);
 
-export const environmentsMap = new Array(4)
-  .fill(null)
-  .map((_, i) =>
+export const environments = ["alley", "field", "street", "town"] as const;
+
+export const environmentsMap = Object.fromEntries(
+  environments.map((environment) => [
+    environment,
     cubeTextureLoader.load([
-      `textures/environmentMaps/${i}/px.jpg`,
-      `textures/environmentMaps/${i}/nx.jpg`,
-      `textures/environmentMaps/${i}/py.jpg`,
-      `textures/environmentMaps/${i}/ny.jpg`,
-      `textures/environmentMaps/${i}/pz.jpg`,
-      `textures/environmentMaps/${i}/nz.jpg`,
-    ])
-  );
+      `textures/environmentMaps/${environment}/px.jpg`,
+      `textures/environmentMaps/${environment}/nx.jpg`,
+      `textures/environmentMaps/${environment}/py.jpg`,
+      `textures/environmentMaps/${environment}/ny.jpg`,
+      `textures/environmentMaps/${environment}/pz.jpg`,
+      `textures/environmentMaps/${environment}/nz.jpg`,
+    ]),
+  ])
+);

@@ -5,6 +5,19 @@ import { matcaps } from "../textures/matcaps";
 export const matcapMaterial = new MeshMatcapMaterial();
 
 matcapMaterial.matcap = matcaps[0];
-gui.add({ matcap: 0 }, "matcap", 0, 7, 1).onChange((value: number) => {
-  matcapMaterial.matcap = matcaps[value];
-});
+
+export const matcapMaterialGui = gui.addFolder("Matcap Material");
+
+matcapMaterialGui.add(
+  {
+    "shuffle material": () => {
+      if (!matcapMaterial.matcap) return;
+      let random = Math.floor(Math.random() * matcaps.length);
+      while (random === matcaps.indexOf(matcapMaterial.matcap))
+        random = Math.floor(Math.random() * matcaps.length);
+
+      matcapMaterial.matcap = matcaps[random];
+    },
+  },
+  "shuffle material"
+);

@@ -1,11 +1,11 @@
 import { Scene } from "three";
-import { handleAnimation } from "./handleAnimation";
+import { handleAnimation } from "./animation/handleAnimation";
 import { createOnResize } from "./onEvents/createOnResize";
 import { createOnDoubleClick } from "./onEvents/createOnDoubleClick";
 import { handleControls } from "./handleControls";
 import { Sizes } from "./types/Sizes";
 import "./style.css";
-import { createFrame } from "./createFrame";
+import { animationFrame } from "./animation/createFrame";
 import { renderScene } from "./renderScene";
 import { loadingManager } from "./loadingManager";
 
@@ -25,7 +25,7 @@ loadingManager.onLoad = () => {
     scene,
     camera,
     renderer,
-    callback: createFrame({ controls }),
+    callback: animationFrame({ controls }),
   });
   window.addEventListener(
     "resize",
