@@ -10,10 +10,8 @@ const speed = {
   x: 0.15,
 };
 
-export function animationFrame({
-  controls,
-}: FrameProps): (seconds: number, scene: Scene) => void {
-  return (seconds, scene) => {
+export function animationFrame({ controls }: FrameProps) {
+  return (seconds: number, scene: Scene) => {
     const meshes = scene.children
       .filter((child) => child.type === "Mesh")
       .filter((child) => child.name !== "text");

@@ -31,81 +31,41 @@ export function makeScene() {
   text.name = "text";
   text.position.y = 1;
 
-  let entries = new Array(400).fill(0).map((_, i) => {
+  let entries: (readonly [number, Mesh<SphereGeometry, MeshBasicMaterial>])[] =
+    [];
+
+  new Array(400).fill(0).forEach((_, i) => {
     const starGeometry = new SphereGeometry(0.05, 8, 8);
     const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-    const star = new Mesh(starGeometry, starMaterial);
+    let star = new Mesh(starGeometry, starMaterial);
     star.position.x = (Math.random() - 0.5) * 50;
     star.position.y = (Math.random() - 0.5) * 50;
     star.position.z = 13;
     star.name = "star";
-    return [i, star];
+    entries.push([entries.length, star] as const);
+
+    star = star.clone();
+    star.position.z = -13;
+    entries.push([entries.length, star] as const);
+
+    star = star.clone();
+    star.position.x = -13;
+    star.position.z = (Math.random() - 0.5) * 50;
+    entries.push([entries.length, star] as const);
+
+    star = star.clone();
+    star.position.x = 13;
+    entries.push([entries.length, star] as const);
+
+    star = star.clone();
+    star.position.y = -13;
+    star.position.x = (Math.random() - 0.5) * 50;
+    entries.push([entries.length, star] as const);
+
+    star = star.clone();
+    star.position.y = 13;
+    entries.push([entries.length, star] as const);
   });
-
-  entries = entries.concat(
-    new Array(400).fill(0).map((_, i) => {
-      const starGeometry = new SphereGeometry(0.05, 8, 8);
-      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-      const star = new Mesh(starGeometry, starMaterial);
-      star.position.x = (Math.random() - 0.5) * 50;
-      star.position.y = (Math.random() - 0.5) * 50;
-      star.position.z = -13;
-      star.name = "star";
-      return [i + entries.length, star];
-    })
-  );
-
-  entries = entries.concat(
-    new Array(400).fill(0).map((_, i) => {
-      const starGeometry = new SphereGeometry(0.05, 8, 8);
-      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-      const star = new Mesh(starGeometry, starMaterial);
-      star.position.x = (Math.random() - 0.5) * 50;
-      star.position.y = 13;
-      star.position.z = (Math.random() - 0.5) * 50;
-      star.name = "star";
-      return [i + entries.length, star];
-    })
-  );
-
-  entries = entries.concat(
-    new Array(400).fill(0).map((_, i) => {
-      const starGeometry = new SphereGeometry(0.05, 8, 8);
-      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-      const star = new Mesh(starGeometry, starMaterial);
-      star.position.x = (Math.random() - 0.5) * 50;
-      star.position.y = -13;
-      star.position.z = (Math.random() - 0.5) * 50;
-      star.name = "star";
-      return [i + entries.length, star];
-    })
-  );
-
-  entries = entries.concat(
-    new Array(400).fill(0).map((_, i) => {
-      const starGeometry = new SphereGeometry(0.05, 8, 8);
-      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-      const star = new Mesh(starGeometry, starMaterial);
-      star.position.x = -13;
-      star.position.y = (Math.random() - 0.5) * 50;
-      star.position.z = (Math.random() - 0.5) * 50;
-      star.name = "star";
-      return [i + entries.length, star];
-    })
-  );
-
-  entries = entries.concat(
-    new Array(400).fill(0).map((_, i) => {
-      const starGeometry = new SphereGeometry(0.05, 8, 8);
-      const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-      const star = new Mesh(starGeometry, starMaterial);
-      star.position.x = 13;
-      star.position.y = (Math.random() - 0.5) * 50;
-      star.position.z = (Math.random() - 0.5) * 50;
-      star.name = "star";
-      return [i + entries.length, star];
-    })
-  );
 
   const stars = Object.fromEntries(entries);
 
