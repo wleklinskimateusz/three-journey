@@ -14,8 +14,6 @@ import { fonts } from "./fonts";
 import { createTextGeometry } from "./geometries/createTextGeometry";
 import { matcapMaterial } from "./materials/matcapMaterial";
 
-import { mirrorMaterial } from "./materials/mirrorMaterial";
-
 function isNotGlBufferAttribute<
   T extends GLBufferAttribute | BufferAttribute | InterleavedBufferAttribute
 >(attribute: T): attribute is Exclude<T, GLBufferAttribute> {
