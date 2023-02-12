@@ -8,7 +8,6 @@ import "./style.css";
 import { createFrame } from "./createFrame";
 import { renderScene } from "./renderScene";
 import { loadingManager } from "./loadingManager";
-import { fonts } from "./fonts";
 
 const canvas = document.querySelector<HTMLCanvasElement>("#app")!;
 
