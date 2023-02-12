@@ -34,7 +34,7 @@ export function makeScene() {
   let entries: (readonly [number, Mesh<SphereGeometry, MeshBasicMaterial>])[] =
     [];
 
-  new Array(400).fill(0).forEach((_, i) => {
+  new Array(400).fill(0).forEach(() => {
     const starGeometry = new SphereGeometry(0.05, 8, 8);
     const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
     let star = new Mesh(starGeometry, starMaterial);
