@@ -1,4 +1,4 @@
-import { Scene } from "three";
+import { Scene, Mesh, SphereGeometry, MeshBasicMaterial } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 type FrameProps = {
@@ -27,6 +27,25 @@ export function animationFrame({
       Math.pow(Math.sin((seconds * 2 * Math.PI) / 3), 2) * 0.5 + 0.5;
     text.scale.set(sinFunc, sinFunc, sinFunc);
     text.rotation.y = (seconds * 2 * Math.PI) / 3;
+
+    const stars = scene.children.filter(
+      (child) => child.name === "star"
+    ) as Mesh<SphereGeometry, MeshBasicMaterial>[];
+    stars.forEach((star) => {
+      const currentColor = star.material.color;
+      // randomize the color a bit
+      const newColor = currentColor
+        .clone()
+        .addScalar((Math.random() - 0.5) * 0.1);
+
+      star.material.color = newColor;
+    });
+
+    const camera = controls.object;
+    camera.position.x = Math.sin((seconds * 2 * Math.PI) / 50) * 4;
+    camera.position.z = Math.cos((seconds * 2 * Math.PI) / 50) * 5;
+    camera.position.y = Math.sin((seconds * 2 * Math.PI) / 4) * 0.1;
+
     controls.update();
   };
 }

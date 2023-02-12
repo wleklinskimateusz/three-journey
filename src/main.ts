@@ -5,7 +5,7 @@ import { createOnDoubleClick } from "./onEvents/createOnDoubleClick";
 import { handleControls } from "./handleControls";
 import { Sizes } from "./types/Sizes";
 import "./style.css";
-import { animationFrame } from "./animation/createFrame";
+import { animationFrame } from "./animation/animationFrame";
 import { renderScene } from "./renderScene";
 import { loadingManager } from "./loadingManager";
 
