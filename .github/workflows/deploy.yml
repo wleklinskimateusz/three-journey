@@ -10,13 +10,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: set up git config
+      run: |
+        git config --local user.email ${{ secrets.email }}
+        git config --local user.name ${{ secrets.name }}
 
     - name: Deploy To Github Pages
       uses: actions/setup-node@v2
       with:
         node-version: '18'
-    - run: git config --local user.email ${{ secrets.email }}
-    - run: git config --local user.name ${{ secrets.name }}
     - run: yarn
     - run: yarn deploy
 
