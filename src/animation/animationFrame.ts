@@ -13,7 +13,6 @@ const speed = {
 
 const guiParams = {
   spin: false,
-  resetPosition: () => {},
 };
 
 gui.add(guiParams, "spin");
