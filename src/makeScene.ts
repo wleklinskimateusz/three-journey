@@ -31,40 +31,26 @@ export function makeScene() {
   text.name = "text";
   text.position.y = 1;
 
-  let entries: (readonly [number, Mesh<SphereGeometry, MeshBasicMaterial>])[] =
-    [];
+  const getSphereCoords = (radius: number) => {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.random() * Math.PI;
+    return [
+      radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.sin(phi) * Math.sin(theta),
+      radius * Math.cos(phi),
+    ];
+  };
 
-  new Array(400).fill(0).forEach(() => {
+  const entries = new Array(1000).fill(0).map((_, i) => {
     const starGeometry = new SphereGeometry(0.05, 8, 8);
     const starMaterial = new MeshBasicMaterial({ color: 0xff0000 });
-    let star = new Mesh(starGeometry, starMaterial);
-    star.position.x = (Math.random() - 0.5) * 50;
-    star.position.y = (Math.random() - 0.5) * 50;
-    star.position.z = 13;
+    const star = new Mesh(starGeometry, starMaterial);
+    const [x, y, z] = getSphereCoords(15);
+    star.position.x = x;
+    star.position.y = y;
+    star.position.z = z;
     star.name = "star";
-    entries.push([entries.length, star] as const);
-
-    star = star.clone();
-    star.position.z = -13;
-    entries.push([entries.length, star] as const);
-
-    star = star.clone();
-    star.position.x = -13;
-    star.position.z = (Math.random() - 0.5) * 50;
-    entries.push([entries.length, star] as const);
-
-    star = star.clone();
-    star.position.x = 13;
-    entries.push([entries.length, star] as const);
-
-    star = star.clone();
-    star.position.y = -13;
-    star.position.x = (Math.random() - 0.5) * 50;
-    entries.push([entries.length, star] as const);
-
-    star = star.clone();
-    star.position.y = 13;
-    entries.push([entries.length, star] as const);
+    return [i, star] as const;
   });
 
   const stars = Object.fromEntries(entries);

@@ -1,5 +1,6 @@
 import { Scene, Mesh, SphereGeometry, MeshBasicMaterial } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { gui } from "../gui";
 
 type FrameProps = {
   controls: OrbitControls;
@@ -9,6 +10,13 @@ const speed = {
   y: 0.1,
   x: 0.15,
 };
+
+const guiParams = {
+  spin: false,
+  resetPosition: () => {},
+};
+
+gui.add(guiParams, "spin");
 
 export function animationFrame({ controls }: FrameProps) {
   return (seconds: number, scene: Scene) => {
@@ -38,11 +46,12 @@ export function animationFrame({ controls }: FrameProps) {
 
       star.material.color = newColor;
     });
-
     const camera = controls.object;
-    camera.position.x = Math.sin((seconds * 2 * Math.PI) / 50) * 4;
-    camera.position.z = Math.cos((seconds * 2 * Math.PI) / 50) * 5;
-    camera.position.y = Math.sin((seconds * 2 * Math.PI) / 4) * 0.1;
+    if (guiParams.spin) {
+      camera.position.x = Math.sin((seconds * 2 * Math.PI) / 50) * 4;
+      camera.position.z = Math.cos((seconds * 2 * Math.PI) / 50) * 5;
+      camera.position.y = Math.sin((seconds * 2 * Math.PI) / 4) * 0.1;
+    }
 
     controls.update();
   };
