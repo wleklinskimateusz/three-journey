@@ -6,7 +6,12 @@ type SetupCameraProps = {
 };
 
 export function setupCamera({ sizes }: SetupCameraProps) {
-  const camera = new PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000);
+  const camera = new PerspectiveCamera(
+    75,
+    sizes.width / sizes.height,
+    0.1,
+    1000
+  );
   camera.position.z = 3.5;
   return camera;
 }
